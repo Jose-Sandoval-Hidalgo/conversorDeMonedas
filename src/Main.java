@@ -24,19 +24,19 @@ public class Main {
 
         String menu = """
                 
-                °•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·
-                Sea bienvenida/o al conversor de monedas:
+                °•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·
+                Bienvenido, por favor elija una opción:
                 
-                1) Dólar a peso chileno.
-                2) Peso chileno a dólar.
-                3) Dólar a real brasileño.
-                4) Real brasileño a dólar.
-                5) Dólar a peso colombiano.
-                6) Peso colombiano a dólar.
-                7) Convertir ingresando códigos de monedas (ISO-4217).
-                8) Revisar historial de conversiones realizadas.
-                9) Salir.
-                °•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·
+                1) Convertir monedas ingresando códigos de divisas (ISO-4217)
+                2) Convertir dólar estadounidense (USD) a peso chileno (CLP)
+                3) Convertir peso chileno (CLP) a dólar (USD)
+                4) Convertir dólar estadounidense (USD a real brasileño (BRL)
+                5) Convertir real brasileño (BRL) a dólar estadounidense (USD)
+                6) Convertir dólar estadounidense (USD) a peso colombiano (COP)
+                7) Convertir peso colombiano (COP) a dólar estadounidense (USD)
+                8) Ver el historial de conversiones realizadas
+                9) Salir
+                °•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·°•·
                 """;
 
         while (opcionMenuEntero != 9){
@@ -55,114 +55,6 @@ public class Main {
 
                 switch (opcionMenuEntero){
                     case 1:
-                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "USD", "CLP");
-                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
-                        System.out.println("Ingresa un valor en dólares estadounidenses para convertir a pesos chilenos:");
-                        dinero = lectura.nextLine();
-                        dineroInicial = testNumero.ValidaFloat(dinero);
-                        while (dineroInicial <= 0){
-                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
-                            dinero = lectura.nextLine();
-                            dineroInicial = testNumero.ValidaFloat(dinero);
-                        }
-                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
-                        resultadoDeConversion = "USD " + String.format("%.2f",dineroInicial)
-                                + " es equivalente a CLP " + String.format("%.2f",dineroFinal);
-                        System.out.println(resultadoDeConversion);
-                        historial.guardaConsulta(resultadoDeConversion);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    case 2:
-                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "CLP", "USD");
-                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
-                        System.out.println("Ingresa un valor en pesos chilenos para convertir a dólares estadounidenses:");
-                        dinero = lectura.nextLine();
-                        dineroInicial = testNumero.ValidaFloat(dinero);
-                        while (dineroInicial <= 0){
-                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
-                            dinero = lectura.nextLine();
-                            dineroInicial = testNumero.ValidaFloat(dinero);
-                        }
-                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
-                        resultadoDeConversion = "CLP " + String.format("%.2f", dineroInicial)
-                                + " es equivalente a USD " + String.format("%.2f", dineroFinal);
-                        System.out.println(resultadoDeConversion);
-                        historial.guardaConsulta(resultadoDeConversion);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    case 3:
-                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "USD", "BRL");
-                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
-                        System.out.println("Ingresa un valor en dólares estadounidenses para convertir a reales brasileños:");
-                        dinero = lectura.nextLine();
-                        dineroInicial = testNumero.ValidaFloat(dinero);
-                        while (dineroInicial <= 0){
-                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
-                            dinero = lectura.nextLine();
-                            dineroInicial = testNumero.ValidaFloat(dinero);
-                        }
-                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
-                        resultadoDeConversion = "USD " + String.format("%.2f", dineroInicial)
-                                + " es equivalente a BRL " + String.format("%.2f", dineroFinal);
-                        System.out.println(resultadoDeConversion);
-                        historial.guardaConsulta(resultadoDeConversion);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    case 4:
-                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "BRL", "USD");
-                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
-                        System.out.println("Ingresa un valor en reales brasileños para convertir a dólares estadounidenses:");
-                        dinero = lectura.nextLine();
-                        dineroInicial = testNumero.ValidaFloat(dinero);
-                        while (dineroInicial <= 0){
-                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
-                            dinero = lectura.nextLine();
-                            dineroInicial = testNumero.ValidaFloat(dinero);
-                        }
-                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
-                        resultadoDeConversion = "BRL " + String.format("%.2f", dineroInicial)
-                                + " es equivalente a USD " + dineroFinal;
-                        System.out.println(resultadoDeConversion);
-                        historial.guardaConsulta(resultadoDeConversion);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    case 5:
-                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "USD", "COP");
-                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
-                        System.out.println("Ingresa un valor en dólares estadounidenses para convertir a pesos colombianos:");
-                        dinero = lectura.nextLine();
-                        dineroInicial = testNumero.ValidaFloat(dinero);
-                        while (dineroInicial <= 0){
-                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
-                            dinero = lectura.nextLine();
-                            dineroInicial = testNumero.ValidaFloat(dinero);
-                        }
-                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
-                        resultadoDeConversion = "USD " + String.format("%.2f", dineroInicial)
-                                + " es equivalente a COP " + String.format("%.2f",dineroFinal);
-                        System.out.println(resultadoDeConversion);
-                        historial.guardaConsulta(resultadoDeConversion);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    case 6:
-                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "COP", "USD");
-                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
-                        System.out.println("Ingresa un valor en pesos colombianos para convertir a dólares estadounidenses:");
-                        dinero = lectura.nextLine();
-                        dineroInicial = testNumero.ValidaFloat(dinero);
-                        while (dineroInicial <= 0){
-                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
-                            dinero = lectura.nextLine();
-                            dineroInicial = testNumero.ValidaFloat(dinero);
-                        }
-                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
-                        resultadoDeConversion = "COP " + String.format("%.2f", dineroInicial)
-                                + " es equivalente a USD " + String.format("%.2f", dineroFinal);
-                        System.out.println(resultadoDeConversion);
-                        historial.guardaConsulta(resultadoDeConversion);
-                        TimeUnit.SECONDS.sleep(2);
-                        break;
-                    case 7:
                         String monedaInicial;
                         String monedaFinal;
                         DatosListaDeDivisasExchangeApi listaDivisasDeApi = consulta.ConsigueDivisasValidas(key);
@@ -199,6 +91,114 @@ public class Main {
                         dineroFinal = conversorMoneda.getConversion_rate() * dineroInicial;
                         resultadoDeConversion = monedaInicial + " " + String.format("%.2f", dineroInicial)
                                 + " es equivalente a " + monedaFinal + " " + String.format("%.2f", dineroFinal);
+                        System.out.println(resultadoDeConversion);
+                        historial.guardaConsulta(resultadoDeConversion);
+                        TimeUnit.SECONDS.sleep(2);
+                        break;
+                    case 2:
+                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "USD", "CLP");
+                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
+                        System.out.println("Ingresa un valor en dólares estadounidenses para convertir a pesos chilenos:");
+                        dinero = lectura.nextLine();
+                        dineroInicial = testNumero.ValidaFloat(dinero);
+                        while (dineroInicial <= 0){
+                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
+                            dinero = lectura.nextLine();
+                            dineroInicial = testNumero.ValidaFloat(dinero);
+                        }
+                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
+                        resultadoDeConversion = "USD " + String.format("%.2f",dineroInicial)
+                                + " es equivalente a CLP " + String.format("%.2f",dineroFinal);
+                        System.out.println(resultadoDeConversion);
+                        historial.guardaConsulta(resultadoDeConversion);
+                        TimeUnit.SECONDS.sleep(2);
+                        break;
+                    case 3:
+                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "CLP", "USD");
+                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
+                        System.out.println("Ingresa un valor en pesos chilenos para convertir a dólares estadounidenses:");
+                        dinero = lectura.nextLine();
+                        dineroInicial = testNumero.ValidaFloat(dinero);
+                        while (dineroInicial <= 0){
+                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
+                            dinero = lectura.nextLine();
+                            dineroInicial = testNumero.ValidaFloat(dinero);
+                        }
+                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
+                        resultadoDeConversion = "CLP " + String.format("%.2f", dineroInicial)
+                                + " es equivalente a USD " + String.format("%.2f", dineroFinal);
+                        System.out.println(resultadoDeConversion);
+                        historial.guardaConsulta(resultadoDeConversion);
+                        TimeUnit.SECONDS.sleep(2);
+                        break;
+                    case 4:
+                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "USD", "BRL");
+                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
+                        System.out.println("Ingresa un valor en dólares estadounidenses para convertir a reales brasileños:");
+                        dinero = lectura.nextLine();
+                        dineroInicial = testNumero.ValidaFloat(dinero);
+                        while (dineroInicial <= 0){
+                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
+                            dinero = lectura.nextLine();
+                            dineroInicial = testNumero.ValidaFloat(dinero);
+                        }
+                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
+                        resultadoDeConversion = "USD " + String.format("%.2f", dineroInicial)
+                                + " es equivalente a BRL " + String.format("%.2f", dineroFinal);
+                        System.out.println(resultadoDeConversion);
+                        historial.guardaConsulta(resultadoDeConversion);
+                        TimeUnit.SECONDS.sleep(2);
+                        break;
+                    case 5:
+                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "BRL", "USD");
+                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
+                        System.out.println("Ingresa un valor en reales brasileños para convertir a dólares estadounidenses:");
+                        dinero = lectura.nextLine();
+                        dineroInicial = testNumero.ValidaFloat(dinero);
+                        while (dineroInicial <= 0){
+                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
+                            dinero = lectura.nextLine();
+                            dineroInicial = testNumero.ValidaFloat(dinero);
+                        }
+                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
+                        resultadoDeConversion = "BRL " + String.format("%.2f", dineroInicial)
+                                + " es equivalente a USD " + dineroFinal;
+                        System.out.println(resultadoDeConversion);
+                        historial.guardaConsulta(resultadoDeConversion);
+                        TimeUnit.SECONDS.sleep(2);
+                        break;
+                    case 6:
+                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "USD", "COP");
+                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
+                        System.out.println("Ingresa un valor en dólares estadounidenses para convertir a pesos colombianos:");
+                        dinero = lectura.nextLine();
+                        dineroInicial = testNumero.ValidaFloat(dinero);
+                        while (dineroInicial <= 0){
+                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
+                            dinero = lectura.nextLine();
+                            dineroInicial = testNumero.ValidaFloat(dinero);
+                        }
+                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
+                        resultadoDeConversion = "USD " + String.format("%.2f", dineroInicial)
+                                + " es equivalente a COP " + String.format("%.2f",dineroFinal);
+                        System.out.println(resultadoDeConversion);
+                        historial.guardaConsulta(resultadoDeConversion);
+                        TimeUnit.SECONDS.sleep(2);
+                        break;
+                    case 7:
+                        conversorMonedaDeApi = consulta.BuscaValorExchange(key, "COP", "USD");
+                        conversorMoneda = new DatosConversionDeMonedas(conversorMonedaDeApi);
+                        System.out.println("Ingresa un valor en pesos colombianos para convertir a dólares estadounidenses:");
+                        dinero = lectura.nextLine();
+                        dineroInicial = testNumero.ValidaFloat(dinero);
+                        while (dineroInicial <= 0){
+                            System.out.println("Valor no válido, por favor ingresa un número positivo, entero o decimal.");
+                            dinero = lectura.nextLine();
+                            dineroInicial = testNumero.ValidaFloat(dinero);
+                        }
+                        dineroFinal = conversorMoneda.getConversion_rate()*dineroInicial;
+                        resultadoDeConversion = "COP " + String.format("%.2f", dineroInicial)
+                                + " es equivalente a USD " + String.format("%.2f", dineroFinal);
                         System.out.println(resultadoDeConversion);
                         historial.guardaConsulta(resultadoDeConversion);
                         TimeUnit.SECONDS.sleep(2);

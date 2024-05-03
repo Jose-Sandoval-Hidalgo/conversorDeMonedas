@@ -9,7 +9,7 @@ public class Historial {
     private final ArrayList<String> historial = new ArrayList<>();
 
     public void guardaConsulta(String conversion){
-        String aHistorial = conversion + "\t| Fecha y hora de consulta: " + LocalDateTime.now();
+        String aHistorial = conversion + "\t\t\t| Fecha y hora de consulta: " + LocalDateTime.now();
         historial.add(aHistorial);
     }
 
